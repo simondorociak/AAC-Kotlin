@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/vanilla"
-             android:padding="@dimen/content_padding"
->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/vanilla"
+        >
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-    >
+            >
 
-        <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
+            <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
                 android:id="@+id/image_user"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/content_half_padding"
-        />
+            />
 
-        <android.support.v7.widget.AppCompatTextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,9 +33,9 @@
                 android:textSize="@dimen/text_title"
                 android:layout_gravity="center"
                 tools:text="Jack Wharton"
-        />
+            />
 
-        <android.support.v7.widget.AppCompatTextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/text_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,9 +43,10 @@
                 android:textSize="@dimen/text_default"
                 android:layout_gravity="center"
                 tools:text="Info"
-        />
+            />
 
-    </LinearLayout>
+        </LinearLayout>
 
+    </FrameLayout>
 
-</FrameLayout>
+</layout>

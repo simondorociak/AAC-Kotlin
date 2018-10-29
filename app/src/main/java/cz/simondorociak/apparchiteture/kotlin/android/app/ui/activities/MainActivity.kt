@@ -2,7 +2,6 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments.UserFragment
 import dagger.android.AndroidInjection

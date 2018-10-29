@@ -3,16 +3,14 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.database.entities.User
-import cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
+import cz.simondorociak.apparchiteture.kotlin.android.app.databinding.FragmentUserBinding
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel
 import dagger.android.support.AndroidSupportInjection
 import timber.log.Timber
@@ -30,21 +28,14 @@ class UserFragment : BaseFragment() {
         }
     }
 
-    @BindView(R.id.image_user)
-    lateinit var imageUser : DynamicImageView
-    @BindView(R.id.text_name)
-    lateinit var textName : AppCompatTextView
-    @BindView(R.id.text_info)
-    lateinit var textInfo : AppCompatTextView
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: UserViewModel
+    lateinit var binding: FragmentUserBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_user, container, false)
-        ButterKnife.bind(this, root)
-        return root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,9 +49,9 @@ class UserFragment : BaseFragment() {
     private fun updateUI(user: User?) {
         user?.let {
             Timber.d("User UI will be updated")
-            imageUser.loadURL(user.avatarUrl)
-            textName.text = user.name
-            textInfo.text = user.company
+            binding.imageUser.loadURL(user.avatarUrl)
+            binding.textName.text = user.name
+            binding.textInfo.text = user.company
         }
     }
 }
