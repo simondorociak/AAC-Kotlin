@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,7 @@ import javax.inject.Inject
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-class UserFragment : Fragment() {
+class UserFragment : BaseFragment() {
 
     companion object {
         val TAG : String = UserFragment::class.java.simpleName
