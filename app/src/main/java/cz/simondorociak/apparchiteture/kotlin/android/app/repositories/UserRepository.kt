@@ -53,7 +53,7 @@ class UserRepository @Inject constructor(
             } else Timber.d("API sync is not required")
         }
     }
-    
+
     private fun getLastRefreshMax() : Date {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
