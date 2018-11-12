@@ -23,7 +23,7 @@ android {
         }
     }
     dataBinding {
-        enabled true
+        enabled = true
     }
 }
 
@@ -53,6 +53,7 @@ dependencies {
     // Retrofit 2
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -71,6 +72,6 @@ dependencies {
     // data binding
     implementation "com.android.databinding:library:${dataBindingLib}"
     implementation "com.android.databinding:adapters:${dataBindingLib}"
-    kapt "com.android.databinding:compiler:3.2.1"
+    kapt "com.android.databinding:compiler:3.1.4"
 
 }

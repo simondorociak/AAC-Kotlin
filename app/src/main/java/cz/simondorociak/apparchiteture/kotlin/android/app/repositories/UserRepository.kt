@@ -1,15 +1,14 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.repositories
 
 import android.arch.lifecycle.LiveData
+import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 import cz.simondorociak.apparchiteture.kotlin.android.app.api.UserWebservice
+import cz.simondorociak.apparchiteture.kotlin.android.app.common.NetworkBoundResource
+import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.database.dao.UserDao
 import cz.simondorociak.apparchiteture.kotlin.android.app.database.entities.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
+import retrofit2.Retrofit
 import java.util.*
-import java.util.concurrent.Executor
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,40 +17,35 @@ import javax.inject.Singleton
  */
 @Singleton
 class UserRepository @Inject constructor(
-    private val webService: UserWebservice,
+    private val retrofit: Retrofit,
     private val userDao: UserDao,
-    private val executor: Executor) {
+    private val appExecutors: AppExecutors) {
 
     private val MAX_REFRESH_LIMIT : Int = 1
 
-    fun getUser(userId: String) : LiveData<User> {
-        // refresh if required
-        refreshUser(userId)
-        return userDao.readById(userId)
-    }
+    fun getUser(userId: String) : LiveData<Resource<User>> {
+        return object: NetworkBoundResource<User, User>(appExecutors) {
 
-    private fun refreshUser(userId: String) {
-        executor.execute {
-            if (userDao.hasUser(userId, getLastRefreshMax()) == null) {
-                webService.getUser(userId).enqueue(object : Callback<User> {
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                        Timber.e("User fetch failure ${t.message}")
-                    }
+            override fun saveCallResult(result: User) {
+                // set up date of user fetch
+                result.lastRefresh = Date()
+                userDao.create(result)
+            }
 
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
-                        Timber.d("User fetch success")
-                        val user: User? = response.body()
-                        user?.let {
-                            executor.execute {
-                                // assign when user was fetched to be able to determine whether to sync or not
-                                user.lastRefresh = Date()
-                                userDao.create(user)
-                            }
-                        }
-                    }
-                })
-            } else Timber.d("API sync is not required")
-        }
+            override fun loadFromDb(): LiveData<User> {
+                return userDao.readById(userId)
+            }
+
+            override fun shouldFetch(data: User?): Boolean {
+                // check if data of user is up to date
+                return (data == null || data.lastRefresh.time < getLastRefreshMax().time)
+            }
+
+            override fun createCall(): LiveData<Resource<User>> {
+                return retrofit.create(UserWebservice::class.java).getUser(userId)
+            }
+
+        }.toLiveData()
     }
 
     private fun getLastRefreshMax() : Date {

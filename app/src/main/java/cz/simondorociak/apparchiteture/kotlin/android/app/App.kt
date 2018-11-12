@@ -13,7 +13,6 @@ import javax.inject.Inject
  */
 class App : Application(), HasActivityInjector {
 
-    // PROPERTIES
     @Inject
     lateinit var activityInjector : DispatchingAndroidInjector<Activity>
 

@@ -10,7 +10,7 @@ import cz.simondorociak.apparchiteture.kotlin.android.app.database.entities.User
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-@Database(entities = [User::class], version = 2)
+@Database(entities = [User::class], version = 3)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

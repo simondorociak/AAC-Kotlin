@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/vanilla"
         >
 
         <LinearLayout
+            android:id="@+id/layout_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:orientation="vertical"
+            android:visibility="gone"
             >
 
             <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
@@ -47,6 +49,25 @@
 
         </LinearLayout>
 
-    </FrameLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Something when wrong :("
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_default"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+        />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:indeterminate="true"
+            android:layout_centerInParent="true"
+        />
+
+    </RelativeLayout>
 
 </layout>

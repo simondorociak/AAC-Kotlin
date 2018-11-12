@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
+import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.database.entities.User
 import cz.simondorociak.apparchiteture.kotlin.android.app.databinding.FragmentUserBinding
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel
@@ -42,16 +43,27 @@ class UserFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
-        viewModel.init("JakeWharton")
-        viewModel.getUser().observe(viewLifecycleOwner, Observer<User> { updateUI(it) })
+        viewModel.getUser("JakeWharton").observe(viewLifecycleOwner, Observer<Resource<User>> { data ->
+            update(data)
+        })
     }
 
-    private fun updateUI(user: User?) {
-        user?.let {
+    private fun update(data: Resource<User>?) {
+        data?.let {
             Timber.d("User UI will be updated")
-            binding.imageUser.loadURL(user.avatarUrl)
-            binding.textName.text = user.name
-            binding.textInfo.text = user.company
+            if (it.status.isLoading()) binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
+            if (it.status.isSuccessful()) {
+                binding.imageUser.loadURL(it.data?.avatarUrl)
+                binding.textName.text = it.data?.name
+                binding.textInfo.text = it.data?.company
+                binding.layoutUser.visibility = View.VISIBLE
+                binding.textError.visibility = View.GONE
+            } else if (it.status.isError()) {
+                Timber.d("Error: ${it.message}, ${it.code}")
+                binding.textError.visibility = View.VISIBLE
+                binding.layoutUser.visibility = View.GONE
+            }
         }
     }
 }
