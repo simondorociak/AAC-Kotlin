@@ -1,7 +1,7 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments.UserFragment
 import dagger.android.AndroidInjection
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
         showUser(savedInstanceState)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> {
         return androidInjector
     }
 

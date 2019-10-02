@@ -1,9 +1,9 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.common
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.support.annotation.MainThread
-import android.support.annotation.WorkerThread
+import androidx.annotation.MainThread
+import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 
 /**
@@ -12,36 +12,22 @@ import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
  * @param <ResultType>
  * @param <RequestType>
  */
-abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constructor(private val appExecutors: AppExecutors) {
+abstract class NetworkBoundResource<ResultType> @MainThread constructor(private val appExecutors: AppExecutors) {
 
     private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
-        // sent to recipient loading event at first
+        // send immediate loading event
         result.value = Resource.loading()
-        @Suppress("leakingThis")
-        val dbSource = loadFromDb()
-        result.addSource(dbSource) {
-            result.removeSource(dbSource)
-            // case when data should be refreshed
-            if (shouldFetch(it)) {
-                fetchFromNetwork(dbSource)
-            } else {
-                // just load data from db because sync is not required
-                result.addSource(dbSource) { result -> setValue(Resource.success(result)) }
-            }
-        }
+        fetchFromNetwork()
     }
 
     fun toLiveData() : LiveData<Resource<ResultType>> = result
 
-    private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
+    private fun fetchFromNetwork() {
         val apiResponse = createCall()
-        // re-attach observer to bound loading state to UI
-        result.addSource(dbSource) { setValue(Resource.loading()) }
         result.addSource(apiResponse) { response ->
             // detach local observers
-            result.removeSource(dbSource)
             result.removeSource(apiResponse)
             // process response
             response?.apply {
@@ -49,9 +35,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
                     appExecutors.getDiskIO().execute {
                         // save data to db
                         data?.let {requestType -> saveCallResult(requestType) }
-                        // load latest fetched data from database to keep rule of "single source of truth"
                         appExecutors.getMainThread().execute {
-                            result.addSource(loadFromDb()) { data -> setValue(Resource.success(data)) }
+                            setValue(Resource.success(data))
                         }
                     }
                 } else {
@@ -70,14 +55,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
     }
 
     @WorkerThread
-    abstract fun saveCallResult(result: RequestType)
+    abstract fun saveCallResult(result: ResultType)
 
     @MainThread
-    abstract fun loadFromDb() : LiveData<ResultType>
-
-    @MainThread
-    abstract fun shouldFetch(data: ResultType?) : Boolean
-
-    @MainThread
-    abstract fun createCall() : LiveData<Resource<RequestType>>
+    abstract fun createCall() : LiveData<Resource<ResultType>>
 }

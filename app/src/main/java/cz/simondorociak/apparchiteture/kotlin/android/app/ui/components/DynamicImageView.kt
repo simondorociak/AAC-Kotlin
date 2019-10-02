@@ -1,7 +1,7 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.ui.components
 
 import android.content.Context
-import android.support.v7.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatImageView
 import android.util.AttributeSet
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation

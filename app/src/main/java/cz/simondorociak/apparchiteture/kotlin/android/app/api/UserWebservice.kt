@@ -1,8 +1,8 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.api
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
-import cz.simondorociak.apparchiteture.kotlin.android.app.database.entities.User
+import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import retrofit2.http.GET
 import retrofit2.http.Path
 

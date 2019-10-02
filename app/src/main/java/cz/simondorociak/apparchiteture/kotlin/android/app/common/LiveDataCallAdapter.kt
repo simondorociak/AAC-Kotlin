@@ -1,6 +1,6 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.common
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.extensions.toResource
 import retrofit2.Call
 import retrofit2.CallAdapter

@@ -1,7 +1,7 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.common;
 
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
 

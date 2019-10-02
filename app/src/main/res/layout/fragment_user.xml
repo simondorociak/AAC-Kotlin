@@ -1,73 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/vanilla"
+>
+
+    <LinearLayout
+        android:id="@+id/layoutUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/vanilla"
-        >
+        <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
+            android:id="@+id/imageUser"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/content_half_padding"
+        />
 
-        <LinearLayout
-            android:id="@+id/layout_user"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_title"
+            android:layout_gravity="center"
+            tools:text="Jack Wharton"
+        />
 
-            <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
-                android:id="@+id/image_user"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/content_half_padding"
-            />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/text_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_title"
-                android:layout_gravity="center"
-                tools:text="Jack Wharton"
-            />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/text_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey_900"
-                android:textSize="@dimen/text_default"
-                android:layout_gravity="center"
-                tools:text="Info"
-            />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text_error"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Something when wrong :("
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/grey_900"
             android:textSize="@dimen/text_default"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
+            android:layout_gravity="center"
+            tools:text="Info"
         />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:indeterminate="true"
-            android:layout_centerInParent="true"
-        />
+    </LinearLayout>
 
-    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something when wrong :("
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_default"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+    />
 
-</layout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+    />
+
+</RelativeLayout>

@@ -1,7 +1,7 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import cz.simondorociak.apparchiteture.kotlin.android.app.di.key.ViewModelKey
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.FactoryViewModel
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel

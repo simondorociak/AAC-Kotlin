@@ -1,7 +1,5 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.database.entities
+package cz.simondorociak.apparchiteture.kotlin.android.app.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
@@ -9,9 +7,8 @@ import java.util.*
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-@Entity(tableName = "User")
 data class User(
-    @PrimaryKey @SerializedName("id") val id: String,
+    @SerializedName("id") val id: String,
     @SerializedName("login") val login: String,
     @SerializedName("avatar_url") val avatarUrl: String,
     @SerializedName("name") val name: String,
