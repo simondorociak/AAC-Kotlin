@@ -13,11 +13,10 @@ import javax.inject.Inject
  */
 class UserViewModel @Inject constructor(private val repository: UserRepository) : ViewModel() {
 
-    private var user: LiveData<Resource<User>> = MutableLiveData()
+    var user: LiveData<Resource<User>> = MutableLiveData()
+        private set
 
-    fun getUser(userId: String) : LiveData<Resource<User>> {
+    fun loadUser(userId: String) {
         user = repository.getUser(userId)
-        return user
     }
-
 }

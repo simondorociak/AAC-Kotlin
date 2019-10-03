@@ -3,7 +3,7 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.di.component
 import android.app.Application
 import cz.simondorociak.apparchiteture.kotlin.android.app.App
 import cz.simondorociak.apparchiteture.kotlin.android.app.di.module.ActivityModule
-import cz.simondorociak.apparchiteture.kotlin.android.app.di.module.AppModule
+import cz.simondorociak.apparchiteture.kotlin.android.app.di.module.NetworkModule
 import cz.simondorociak.apparchiteture.kotlin.android.app.di.module.FragmentModule
 import dagger.BindsInstance
 import dagger.Component
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-@Component(modules = [AndroidSupportInjectionModule::class, AppModule::class, ActivityModule::class, FragmentModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, NetworkModule::class, ActivityModule::class, FragmentModule::class])
 @Singleton
 interface AppComponent {
 

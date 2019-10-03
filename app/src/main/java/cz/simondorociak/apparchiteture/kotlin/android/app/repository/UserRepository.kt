@@ -1,12 +1,12 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.repository
 
 import androidx.lifecycle.LiveData
-import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
+import androidx.lifecycle.liveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
-import cz.simondorociak.apparchiteture.kotlin.android.app.common.NetworkBoundResource
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
-import retrofit2.Retrofit
+import kotlinx.coroutines.Dispatchers
+import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,17 +15,15 @@ import javax.inject.Singleton
  */
 @Singleton
 class UserRepository @Inject constructor(
-    private val retrofit: Retrofit,
-    private val appExecutors: AppExecutors) {
+    private val apiService: ApiService) {
 
-    fun getUser(userId: String) : LiveData<Resource<User>> {
-        return object: NetworkBoundResource<User>(appExecutors) {
-
-            override fun saveCallResult(result: User) { }
-
-            override fun createCall(): LiveData<Resource<User>> {
-                return retrofit.create(ApiService::class.java).getUser(userId)
-            }
-        }.toLiveData()
+    fun getUser(userId: String) : LiveData<Resource<User>> = liveData(Dispatchers.IO) {
+        emit(Resource.Loading<User>())
+        try {
+            val data = apiService.getUser(userId)
+            emit(Resource.Success(data))
+        } catch (e: HttpException) {
+            emit(Resource.Error<User>(e.code(), e.response()?.message().orEmpty()))
+        }
     }
 }

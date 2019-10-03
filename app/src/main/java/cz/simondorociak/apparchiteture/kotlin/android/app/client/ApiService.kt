@@ -1,7 +1,5 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.client
 
-import androidx.lifecycle.LiveData
-import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,5 +10,5 @@ import retrofit2.http.Path
 interface ApiService {
 
     @GET("/users/{user}")
-    fun getUser(@Path("user") userId: String) : LiveData<Resource<User>>
+    suspend fun getUser(@Path("user") userId: String) : User
 }

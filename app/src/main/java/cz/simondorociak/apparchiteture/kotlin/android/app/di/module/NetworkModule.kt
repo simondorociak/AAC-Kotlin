@@ -1,11 +1,11 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 import cz.simondorociak.apparchiteture.kotlin.android.app.BuildConfig
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
-import cz.simondorociak.apparchiteture.kotlin.android.app.common.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -18,14 +18,14 @@ import javax.inject.Singleton
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
 @Module(includes = [ViewModelModule::class])
-class AppModule {
+class NetworkModule {
 
     @Provides
     @Singleton
     fun provideAppExecutors() : AppExecutors = AppExecutors()
 
     @Provides
-    fun provideGson() : Gson = GsonBuilder().create()
+    fun provideGson() : Gson = GsonBuilder().apply { setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES) }.create()
 
     @Provides
     @Singleton
@@ -44,7 +44,6 @@ class AppModule {
             .client(client)
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
     }
 

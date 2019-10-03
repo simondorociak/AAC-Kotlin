@@ -3,24 +3,11 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.common
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-class Resource<out T>(val status: Status, val data: T?, val code: Int = 9999, val message: String? = null) {
+sealed class Resource<T>(val data: T? = null, val code: Int = HttpCodes.HTTP_UNKNOWN, val message: String? = null) {
 
-    companion object {
+    class Success<T>(data: T) : Resource<T>(data, HttpCodes.HTTP_OK)
 
-        fun <T> offline() : Resource<T> {
-            return Resource(Status.OFFLINE, null)
-        }
+    class Error<T>(code: Int, message: String) : Resource<T>(code = code, message = message)
 
-        fun <T> loading() : Resource<T> {
-            return Resource(Status.LOADING, null)
-        }
-
-        fun <T> success(data: T? = null, code: Int = 200) : Resource<T> {
-            return Resource(Status.SUCCESS, data, code)
-        }
-
-        fun <T> error(message: String?, code: Int) : Resource<T> {
-            return Resource(Status.ERROR, null, code, message)
-        }
-    }
+    class Loading<T> : Resource<T>()
 }

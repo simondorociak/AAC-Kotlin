@@ -2,9 +2,7 @@
 <resources>
 
     <!-- Common dimensions -->
-    <dimen name="base_padding">4dp</dimen>
-    <dimen name="content_half_padding">8dp</dimen>
-    <dimen name="content_padding">16dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
 
     <!-- text dimensions -->
     <dimen name="text_default">14sp</dimen>
