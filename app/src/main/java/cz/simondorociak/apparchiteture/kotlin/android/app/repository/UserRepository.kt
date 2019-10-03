@@ -1,8 +1,8 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.repositories
+package cz.simondorociak.apparchiteture.kotlin.android.app.repository
 
 import androidx.lifecycle.LiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.ApiService
+import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.NetworkBoundResource
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User

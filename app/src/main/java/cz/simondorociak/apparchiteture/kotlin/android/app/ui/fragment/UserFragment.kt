@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments
+package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
-import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel
+import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel.UserViewModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_user.*
 import timber.log.Timber

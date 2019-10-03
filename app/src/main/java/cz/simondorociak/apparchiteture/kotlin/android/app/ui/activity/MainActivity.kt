@@ -1,9 +1,8 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities
+package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activity
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
-import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments.UserFragment
+import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment.UserFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

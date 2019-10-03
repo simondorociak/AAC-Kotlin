@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.api.response
+package cz.simondorociak.apparchiteture.kotlin.android.app.client.response
 
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>

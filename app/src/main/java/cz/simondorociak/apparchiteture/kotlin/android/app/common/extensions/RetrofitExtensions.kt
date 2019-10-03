@@ -2,8 +2,8 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.common.extensions
 
 import android.text.TextUtils
 import com.google.gson.Gson
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.response.BaseResponse
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.response.ErrorBody
+import cz.simondorociak.apparchiteture.kotlin.android.app.client.response.BaseResponse
+import cz.simondorociak.apparchiteture.kotlin.android.app.client.response.ErrorBody
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Constants
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import retrofit2.Response

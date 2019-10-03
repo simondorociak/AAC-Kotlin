@@ -1,6 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments
-
-import androidx.fragment.app.Fragment
+package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment
 
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>

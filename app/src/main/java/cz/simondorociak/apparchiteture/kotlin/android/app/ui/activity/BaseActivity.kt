@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities
+package cz.simondorociak.apparchiteture.kotlin.android.app.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 

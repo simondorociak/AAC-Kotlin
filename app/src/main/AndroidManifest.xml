@@ -16,7 +16,7 @@
             android:name=".App"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities.MainActivity">
+        <activity android:name="cz.simondorociak.apparchiteture.kotlin.android.app.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

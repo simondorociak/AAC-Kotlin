@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 import cz.simondorociak.apparchiteture.kotlin.android.app.BuildConfig
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.ApiService
+import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides

@@ -3,8 +3,8 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import cz.simondorociak.apparchiteture.kotlin.android.app.di.ViewModelKey
-import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.FactoryViewModel
-import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel
+import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel.FactoryViewModel
+import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel.UserViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

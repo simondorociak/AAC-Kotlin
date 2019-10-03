@@ -16,7 +16,7 @@
         android:visibility="gone"
     >
 
-        <cz.simondorociak.apparchiteture.kotlin.android.app.ui.components.DynamicImageView
+        <cz.simondorociak.apparchiteture.kotlin.android.app.ui.component.DynamicImageView
             android:id="@+id/imageUser"
             android:layout_width="64dp"
             android:layout_height="64dp"

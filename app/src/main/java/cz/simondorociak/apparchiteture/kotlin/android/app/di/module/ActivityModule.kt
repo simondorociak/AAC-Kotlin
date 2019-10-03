@@ -1,6 +1,6 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
-import cz.simondorociak.apparchiteture.kotlin.android.app.ui.activities.MainActivity
+import cz.simondorociak.apparchiteture.kotlin.android.app.ui.activity.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

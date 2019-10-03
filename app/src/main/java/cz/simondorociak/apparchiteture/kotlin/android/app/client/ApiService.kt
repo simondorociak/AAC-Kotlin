@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.api
+package cz.simondorociak.apparchiteture.kotlin.android.app.client
 
 import androidx.lifecycle.LiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource

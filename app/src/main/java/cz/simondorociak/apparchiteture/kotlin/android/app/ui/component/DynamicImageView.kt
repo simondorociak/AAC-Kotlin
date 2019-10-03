@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.ui.components
+package cz.simondorociak.apparchiteture.kotlin.android.app.ui.component
 
 import android.content.Context
 import androidx.appcompat.widget.AppCompatImageView

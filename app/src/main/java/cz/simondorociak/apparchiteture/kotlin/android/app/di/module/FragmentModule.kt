@@ -1,6 +1,6 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
-import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragments.UserFragment
+import cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

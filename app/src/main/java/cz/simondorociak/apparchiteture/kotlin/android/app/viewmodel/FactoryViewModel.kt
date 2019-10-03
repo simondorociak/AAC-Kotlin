@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels
+package cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
