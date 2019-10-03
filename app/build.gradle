@@ -3,21 +3,58 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
+def versionMajor = 1
+def versionMinor = 0
+def versionBuild = 0
 
-    compileSdkVersion 28
+def versionMajorProduction = 1
+def versionMinorProduction = 0
+def versionPatchProduction = 0
+
+// get dynamic build version based on from git commits count
+//buildNumber = Integer.parseInt('git rev-list dev --count'.execute().text.trim())
+//println 'Current build number ' + buildNumber + ' based on commit count in dev branch'
+
+def props = new Properties()
+props.load(new FileInputStream(new File("$rootDir/properties/secrets.properties")))
+
+android {
+    compileSdkVersion 29
     defaultConfig {
-        applicationId "cz.simondorociak.apparchiteture.kotlin.android.app"
+        applicationId "cz.simondorociak.aac.kotlin.app.devel"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 29
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionBuild}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        flavorDimensions "client"
+        resValue 'string', "app_name", "ACC-Kotlin"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file(props['keyPath.debug'])
+            keyAlias props['keyAlias.debug']
+            keyPassword props['keyPassword.debug']
+            storePassword props['storePassword.debug']
+        }
+        release {
+            storeFile file(props['keyPath.production'])
+            keyAlias props['keyAlias.production']
+            keyPassword props['keyPassword.production']
+            storePassword props['storePassword.production']
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,43 +67,79 @@ android {
     androidExtensions {
         experimental true
     }
+
+    productFlavors {
+        devel {
+            applicationId "cz.simondorociak.aac.kotlin.app.devel"
+            versionNameSuffix ".debug"
+            buildConfigField 'String', "API_URL", props['apiUrl.devel']
+        }
+        production {
+            applicationId "cz.simondorociak.aac.kotlin.app"
+            buildConfigField 'String', "API_URL", props['apiUrl.production']
+        }
+    }
 }
 
 ext {
-
+    supportLib = '1.1.0'
+    daggerLib = '2.21'
+    retrofitLib = '2.6.1'
+    okHttpLib = '3.14.1'
+    archVersion = '2.2.0-alpha05'
+    picassoLib = '2.71828'
+    picasssoTransformLib = '2.2.1'
+    timberLib = '4.7.1'
+    httpLoggingLib = '4.0.1'
+    googleCoreLib = '1.6.3'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    // Support
+    implementation "androidx.appcompat:appcompat:$supportLib"
+
+    // Anko
+    implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
 
     // ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
-
-    // GSON
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation "androidx.lifecycle:lifecycle-extensions:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$archVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archVersion"
 
     // Retrofit 2
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitLib"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitLib"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingLib"
 
     // Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation "com.squareup.picasso:picasso:$picassoLib"
+    implementation "jp.wasabeef:picasso-transformations:$picasssoTransformLib"
 
     // Dagger 2
-    kapt 'com.google.dagger:dagger-compiler:2.17'
-    kapt 'com.google.dagger:dagger-android-processor:2.17'
-    implementation 'com.google.dagger:dagger:2.17'
-    implementation 'com.google.dagger:dagger-android-support:2.17'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.71"
+    kapt "com.google.dagger:dagger-compiler:$daggerLib"
+    kapt "com.google.dagger:dagger-android-processor:$daggerLib"
+    implementation "com.google.dagger:dagger:$daggerLib"
+    implementation "com.google.dagger:dagger-android-support:$daggerLib"
 
     // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.jakewharton.timber:timber:$timberLib"
+
+    // In-app updates
+    implementation "com.google.android.play:core:$googleCoreLib"
 }

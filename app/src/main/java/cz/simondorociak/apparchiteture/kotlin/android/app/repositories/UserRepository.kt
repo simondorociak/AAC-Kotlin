@@ -2,7 +2,7 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.repositories
 
 import androidx.lifecycle.LiveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.UserWebservice
+import cz.simondorociak.apparchiteture.kotlin.android.app.api.ApiService
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.NetworkBoundResource
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(
             override fun saveCallResult(result: User) { }
 
             override fun createCall(): LiveData<Resource<User>> {
-                return retrofit.create(UserWebservice::class.java).getUser(userId)
+                return retrofit.create(ApiService::class.java).getUser(userId)
             }
         }.toLiveData()
     }

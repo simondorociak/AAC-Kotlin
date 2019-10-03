@@ -1,4 +1,4 @@
-package cz.simondorociak.apparchiteture.kotlin.android.app.di.key
+package cz.simondorociak.apparchiteture.kotlin.android.app.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

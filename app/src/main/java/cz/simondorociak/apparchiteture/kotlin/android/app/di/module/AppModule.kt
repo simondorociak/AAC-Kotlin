@@ -3,7 +3,8 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
-import cz.simondorociak.apparchiteture.kotlin.android.app.api.UserWebservice
+import cz.simondorociak.apparchiteture.kotlin.android.app.BuildConfig
+import cz.simondorociak.apparchiteture.kotlin.android.app.api.ApiService
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -41,7 +42,7 @@ class AppModule {
     fun provideRetrofit(client: OkHttpClient, gson: Gson) : Retrofit {
         return Retrofit.Builder()
             .client(client)
-            .baseUrl("https://api.github.com/")
+            .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
@@ -49,5 +50,5 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideWebservice(retrofit: Retrofit) : UserWebservice = retrofit.create(UserWebservice::class.java)
+    fun provideApiService(retrofit: Retrofit) : ApiService = retrofit.create(ApiService::class.java)
 }

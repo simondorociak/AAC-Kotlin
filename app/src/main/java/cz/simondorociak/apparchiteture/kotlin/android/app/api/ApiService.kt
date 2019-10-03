@@ -9,7 +9,7 @@ import retrofit2.http.Path
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-interface UserWebservice {
+interface ApiService {
 
     @GET("/users/{user}")
     fun getUser(@Path("user") userId: String) : LiveData<Resource<User>>

@@ -2,7 +2,7 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import cz.simondorociak.apparchiteture.kotlin.android.app.di.key.ViewModelKey
+import cz.simondorociak.apparchiteture.kotlin.android.app.di.ViewModelKey
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.FactoryViewModel
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodels.UserViewModel
 import dagger.Binds
@@ -18,8 +18,8 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(UserViewModel::class)
-    abstract fun providerUserViewModel(viewModel: UserViewModel) : ViewModel
+    internal abstract fun providerUserViewModel(viewModel: UserViewModel) : ViewModel
 
     @Binds
-    abstract fun provideViewModelFactory(factory: FactoryViewModel) : ViewModelProvider.Factory
+    internal abstract fun provideViewModelFactory(factory: FactoryViewModel) : ViewModelProvider.Factory
 }
