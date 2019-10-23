@@ -47,7 +47,7 @@ class UserFragment : BaseFragment() {
             when(it) {
                 is Resource.Success -> {
                     Timber.tag(TAG).d("User load success")
-                    it.data?.let { update(it) } ?: activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
+                    it.data?.let { data -> update(data) } ?: activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
                 is Resource.Error -> {
                     Timber.tag(TAG).e("User load error")

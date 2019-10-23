@@ -86,12 +86,13 @@ ext {
     daggerLib = '2.21'
     retrofitLib = '2.6.1'
     okHttpLib = '3.14.1'
-    archVersion = '2.2.0-alpha05'
+    archVersion = '2.2.0-rc01'
     picassoLib = '2.71828'
     picasssoTransformLib = '2.2.1'
     timberLib = '4.7.1'
     httpLoggingLib = '4.0.1'
-    googleCoreLib = '1.6.3'
+    googleCoreLib = '1.6.4'
+    moshiKt = '1.8.0'
 }
 
 dependencies {
@@ -124,7 +125,9 @@ dependencies {
 
     // Retrofit 2
     implementation "com.squareup.retrofit2:retrofit:$retrofitLib"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitLib"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitLib"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiKt"
+    implementation "com.squareup.moshi:moshi-adapters:$moshiKt"
     implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingLib"
 
     // Picasso

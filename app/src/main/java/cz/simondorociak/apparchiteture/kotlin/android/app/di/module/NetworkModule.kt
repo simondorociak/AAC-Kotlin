@@ -1,8 +1,8 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 import cz.simondorociak.apparchiteture.kotlin.android.app.BuildConfig
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
@@ -11,7 +11,8 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 /**
@@ -25,9 +26,6 @@ class NetworkModule {
     fun provideAppExecutors() : AppExecutors = AppExecutors()
 
     @Provides
-    fun provideGson() : Gson = GsonBuilder().apply { setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES) }.create()
-
-    @Provides
     @Singleton
     fun provideOkHttpClient() : OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -39,11 +37,20 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient, gson: Gson) : Retrofit {
+    fun provideMoshi() : Moshi {
+        return Moshi.Builder()
+            .add(Date::class.java, Rfc3339DateJsonAdapter())
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(client: OkHttpClient, moshi: Moshi) : Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(BuildConfig.API_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 

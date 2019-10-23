@@ -1,6 +1,5 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(
     private val apiService: ApiService) {
 
-    fun getUser(userId: String) : LiveData<Resource<User>> = liveData(Dispatchers.IO) {
+    fun getUser(userId: String) = liveData(Dispatchers.IO) {
         emit(Resource.Loading<User>())
         try {
             val data = apiService.getUser(userId)
