@@ -93,6 +93,7 @@ ext {
     httpLoggingLib = '4.0.1'
     googleCoreLib = '1.6.4'
     moshiKt = '1.8.0'
+    threetenLib = '1.2.1'
 }
 
 dependencies {
@@ -129,6 +130,9 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$moshiKt"
     implementation "com.squareup.moshi:moshi-adapters:$moshiKt"
     implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingLib"
+
+    // ThreeTenABP backport for Android
+    //implementation "com.jakewharton.threetenabp:threetenabp:$threetenLib"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$picassoLib"

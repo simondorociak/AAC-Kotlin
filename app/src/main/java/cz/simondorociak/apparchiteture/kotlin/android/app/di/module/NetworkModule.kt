@@ -3,7 +3,6 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.di.module
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import cz.simondorociak.apparchiteture.kotlin.android.app.AppExecutors
 import cz.simondorociak.apparchiteture.kotlin.android.app.BuildConfig
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
 import dagger.Module
@@ -20,10 +19,6 @@ import javax.inject.Singleton
  */
 @Module(includes = [ViewModelModule::class])
 class NetworkModule {
-
-    @Provides
-    @Singleton
-    fun provideAppExecutors() : AppExecutors = AppExecutors()
 
     @Provides
     @Singleton

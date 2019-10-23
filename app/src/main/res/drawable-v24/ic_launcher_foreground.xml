@@ -2,10 +2,10 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="240"
-    android:viewportHeight="240">
-  <group android:translateX="90"
-      android:translateY="90">
+    android:viewportWidth="260.86957"
+    android:viewportHeight="260.86957">
+  <group android:translateX="100.434784"
+      android:translateY="100.434784">
     <path
         android:pathData="M0,60l30.1,-30.1l29.9,30.1z">
       <aapt:attr name="android:fillColor">
