@@ -41,8 +41,7 @@ class UserFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
-        viewModel.loadUser("JakeWharton")
-        viewModel.user.observe(this, Observer {
+        viewModel.loadUser("JakeWharton").observe(this, Observer {
             progressBar.visibility = if (it is Resource.Loading) View.VISIBLE else View.GONE
             when(it) {
                 is Resource.Success -> {
