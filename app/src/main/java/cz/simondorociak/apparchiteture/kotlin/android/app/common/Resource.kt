@@ -7,7 +7,7 @@ sealed class Resource<T>(val data: T? = null, val code: Int = HttpCodes.HTTP_UNK
 
     class Success<T>(data: T) : Resource<T>(data, HttpCodes.HTTP_OK)
 
-    class Error<T>(code: Int, message: String) : Resource<T>(code = code, message = message)
+    class Error<T>(code: Int, message: String?) : Resource<T>(code = code, message = message)
 
     class Loading<T> : Resource<T>()
 }

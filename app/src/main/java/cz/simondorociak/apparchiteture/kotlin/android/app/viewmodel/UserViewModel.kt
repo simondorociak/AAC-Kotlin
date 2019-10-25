@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
+import cz.simondorociak.apparchiteture.kotlin.android.app.extensions.parseError
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import cz.simondorociak.apparchiteture.kotlin.android.app.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
                 val data = repository.getUser(userId)
                 emit(Resource.Success(data))
             } catch (e: HttpException) {
-                emit(Resource.Error<User>(e.code(), e.response()?.message().orEmpty()))
+                emit(Resource.Error<User>(e.response()?.code() ?: e.code(), e.response()?.parseError()))
             }
         }
         return user
