@@ -51,7 +51,7 @@ class UserFragment : BaseFragment() {
             }
         })
     }
-    
+
     private fun update(data: User) {
         imageUser?.loadURL(data.avatarUrl)
         textName?.text = data.name

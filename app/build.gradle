@@ -22,7 +22,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "cz.simondorociak.aac.kotlin.app.devel"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionBuild}"
