@@ -9,6 +9,7 @@
     >
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         >
@@ -20,6 +21,7 @@
             android:indeterminate="true"
             android:layout_gravity="end|center"
             android:layout_marginEnd="@dimen/default_padding"
+            android:indeterminateTint="@color/white"
         />
 
     </androidx.appcompat.widget.Toolbar>
@@ -41,24 +43,33 @@
         />
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_title"
             android:layout_gravity="center"
             tools:text="Jack Wharton"
         />
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:id="@+id/textInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey_900"
-            android:textSize="@dimen/text_default"
             android:layout_gravity="center"
             tools:text="Info"
         />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click on me"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="@dimen/default_padding"
+            />
 
     </LinearLayout>
 

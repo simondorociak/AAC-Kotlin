@@ -6,12 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
+import cz.simondorociak.apparchiteture.kotlin.android.app.extensions.snackbar
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_user.*
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.design.snackbar
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -41,10 +39,10 @@ class UserFragment : BaseFragment() {
             progressBar.isVisible = it is Resource.Loading
             when(it) {
                 is Resource.Success -> {
-                    it.data?.let { data -> update(data) } ?: activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
+                    it.data?.let { data -> update(data) } ?: view?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
                 is Resource.Error -> {
-                    activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
+                    view?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
             }
         })
@@ -55,5 +53,6 @@ class UserFragment : BaseFragment() {
         imageUser?.loadURL(data.avatarUrl)
         textName?.text = data.name
         textInfo?.text = data.company
+        toolbar?.title = data.name
     }
 }
