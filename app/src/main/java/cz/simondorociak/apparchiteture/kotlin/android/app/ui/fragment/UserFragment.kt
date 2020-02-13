@@ -1,7 +1,6 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment
 
 import android.os.Bundle
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,19 +37,18 @@ class UserFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
-        viewModel.loadUser("JakeWharton").observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             progressBar.isVisible = it is Resource.Loading
             when(it) {
                 is Resource.Success -> {
-                    Timber.tag(TAG).d("User load success")
                     it.data?.let { data -> update(data) } ?: activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
                 is Resource.Error -> {
-                    Timber.tag(TAG).e("User load error")
                     activity?.contentView?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
             }
         })
+        viewModel.loadUser("JakeWharton")
     }
 
     private fun update(data: User) {

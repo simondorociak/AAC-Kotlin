@@ -1,6 +1,13 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import cz.simondorociak.apparchiteture.kotlin.android.app.client.ApiService
+import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
+import cz.simondorociak.apparchiteture.kotlin.android.app.extensions.parseError
+import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
+import kotlinx.coroutines.Dispatchers
+import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,5 +18,15 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(
     private val apiService: ApiService) {
 
-    suspend fun getUser(userId: String) = apiService.getUser(userId)
+    fun getUser(userId: String) : LiveData<Resource<User>> {
+        return liveData(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try {
+                val result = apiService.getUser(userId)
+                emit(Resource.Success(result))
+            } catch (e: HttpException) {
+                emit(Resource.Error(e.response()?.code() ?: e.code(), e.response()?.parseError()))
+            }
+        }
+    }
 }
