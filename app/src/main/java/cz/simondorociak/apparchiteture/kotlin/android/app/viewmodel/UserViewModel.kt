@@ -22,12 +22,12 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
 
     fun loadUser(userId: String) : LiveData<Resource<User>> {
         user = liveData(Dispatchers.IO) {
-            emit(Resource.Loading<User>())
+            emit(Resource.Loading())
             try {
                 val data = repository.getUser(userId)
                 emit(Resource.Success(data))
             } catch (e: HttpException) {
-                emit(Resource.Error<User>(e.response()?.code() ?: e.code(), e.response()?.parseError()))
+                emit(Resource.Error(e.response()?.code() ?: e.code(), e.response()?.parseError()))
             }
         }
         return user

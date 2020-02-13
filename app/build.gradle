@@ -86,7 +86,7 @@ ext {
     daggerLib = '2.21'
     retrofitLib = '2.6.1'
     okHttpLib = '3.14.1'
-    archVersion = '2.2.0-rc01'
+    archVersion = '2.2.0'
     picassoLib = '2.71828'
     picasssoTransformLib = '2.2.1'
     timberLib = '4.7.1'
@@ -105,7 +105,7 @@ dependencies {
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 

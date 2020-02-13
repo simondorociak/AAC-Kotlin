@@ -2,6 +2,7 @@ package cz.simondorociak.apparchiteture.kotlin.android.app.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
@@ -37,8 +38,8 @@ class UserFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
-        viewModel.loadUser("JakeWharton").observe(this, Observer {
-            progressBar.visibility = if (it is Resource.Loading) View.VISIBLE else View.GONE
+        viewModel.loadUser("JakeWharton").observe(viewLifecycleOwner, Observer {
+            progressBar.isVisible = it is Resource.Loading
             when(it) {
                 is Resource.Success -> {
                     Timber.tag(TAG).d("User load success")
