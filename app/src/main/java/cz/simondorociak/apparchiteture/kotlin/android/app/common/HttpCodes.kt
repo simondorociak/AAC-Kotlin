@@ -13,6 +13,4 @@ object HttpCodes {
     const val HTTP_ERROR_TIMEOUT = 408
     const val HTTP_SERVICE_UNAVAILABLE = 503
     const val HTTP_UNKNOWN = 999
-    const val HTTP_NO_INTERNET_CONNECTION = 10009
-    const val HTTP_ERROR_OTHER = 10004
 }
