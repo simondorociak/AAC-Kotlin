@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import cz.simondorociak.apparchiteture.kotlin.android.app.R
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
 import cz.simondorociak.apparchiteture.kotlin.android.app.extensions.snackbar
-import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_user.*
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -35,24 +35,16 @@ class UserFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.users.observe(viewLifecycleOwner, Observer {
             progressBar.isVisible = it is Resource.Loading
             when(it) {
                 is Resource.Success -> {
-                    it.data?.let { data -> update(data) } ?: view?.snackbar(getString(R.string.msg_something_went_wrong))
+                    Timber.tag(TAG).d("Resource.Success")
                 }
                 is Resource.Error -> {
                     view?.snackbar(getString(R.string.msg_something_went_wrong))
                 }
             }
         })
-        viewModel.loadUser("JakeWharton")
-    }
-
-    private fun update(data: User) {
-        imageUser?.loadURL(data.avatarUrl)
-        textName?.text = data.name
-        textInfo?.text = data.company
-        toolbar?.title = data.name
     }
 }
