@@ -1,29 +1,28 @@
 package cz.simondorociak.apparchiteture.kotlin.android.app.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import cz.simondorociak.apparchiteture.kotlin.android.app.common.Resource
-import cz.simondorociak.apparchiteture.kotlin.android.app.extensions.parseError
 import cz.simondorociak.apparchiteture.kotlin.android.app.model.User
 import cz.simondorociak.apparchiteture.kotlin.android.app.repository.UserRepository
-import kotlinx.coroutines.Dispatchers
-import retrofit2.HttpException
 import javax.inject.Inject
 
 /**
  * @author Simon Dorociak <S.Dorociak@gmail.com>
  */
-class UserViewModel @Inject constructor(private val repository: UserRepository) : ViewModel() {
+class UserViewModel @Inject constructor(
+    private val repository: UserRepository) : ViewModel() {
 
-    var user = MediatorLiveData<Resource<User>>()
+    var users = MediatorLiveData<Resource<List<User>>>()
         private set
 
-    fun loadUser(userId: String) {
-        val result = repository.getUser(userId)
-        user.addSource(result) {
-            user.value = it
-            if (it is Resource.Success) {
-                user.removeSource(result)
-            }
+    init {
+        // on each init of view model load at first users from db
+        users.value = Resource.Loading()
+        val result = repository.getUsersFromDb()
+        users.addSource(result) {
+            users.value = Resource.Success(it)
+            users.removeSource(result)
         }
     }
 }
